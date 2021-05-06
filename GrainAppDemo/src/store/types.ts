@@ -1,0 +1,10 @@
+export const LOGIN = "LOGIN";
+export const AUTO_LOGIN = "AUTO_LOGIN";
+export const LOGOUT = "LOGOUT";
+
+export const LOAD_PROJECTS = "LOAD_PROJECTS";
+export const LOAD_MORE_PROJECTS = "LOAD_MORE_PROJECTS";
+export const LOAD_COMPLETED_PROJECTS = "LOAD_COMPLETED_PROJECTS";
+export const ADD_PROJECT = "ADD_PROJECT";
+export const DELETE_PROJECT = "DELETE_PROJECT";
+export const COMPLETE_PROJECT = "COMPLETE_PROJECT";
