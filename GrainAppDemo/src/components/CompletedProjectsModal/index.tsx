@@ -9,7 +9,7 @@ import { useAppSelector } from "../../hooks";
 import {
   deleteProject,
   loadCompletedProjects,
-  restoreProject,
+  // restoreProject,
 } from "../../store/actions/project";
 import CompletedProjectsList from "../CompletedProjectsList";
 import DefaultText from "../DefaultText";
