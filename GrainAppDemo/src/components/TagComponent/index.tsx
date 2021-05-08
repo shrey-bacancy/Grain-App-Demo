@@ -1,12 +1,12 @@
 import React, { FC } from "react";
-import { GestureResponderEvent, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Icon } from "react-native-elements";
 import Colors from "../../constants/colors";
 import DefaultText from "../DefaultText";
 
 interface TagComponentProps {
   name?: string;
-  removeTag?: (event: GestureResponderEvent) => void;
+  removeTag?: any;
 }
 
 const TagComponent: FC<TagComponentProps> = (props) => {
@@ -20,8 +20,7 @@ const TagComponent: FC<TagComponentProps> = (props) => {
         name="closecircleo"
         size={15}
         color={Colors.grey}
-        //@ts-ignore
-        onPress={props.removeTag.bind(this, props.name)}
+        onPress={() => props.removeTag(props.name)}
       />
     </View>
   );
@@ -37,6 +36,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 6,
     paddingHorizontal: 16,
     paddingVertical: 4,
+    marginVertical: 6,
   },
   tagName: {
     fontSize: 14,

@@ -5,12 +5,14 @@ import {
   FETCH_COMPLETED_PROJECTS_URL,
   FETCH_PROJECTS_URL,
 } from "../../api";
+import { errorToast } from "../../globals";
 import {
   addProjectAction,
   completeProjectAction,
   deleteProjectAction,
   loadCompletedProjectsAction,
   loadProjectsAction,
+  // restoreProjectAction,
 } from "./ActionCreators/projectActionCreators";
 
 export const addProject = (
@@ -32,14 +34,11 @@ export const addProject = (
       }),
     });
 
-    if (!response.ok) {
-      const errorResData = await response.json();
-      let message = errorResData.message;
-      throw new Error(message);
-    }
-
     const resData = await response.json();
-    console.log(resData);
+
+    if (!response.ok) {
+      errorToast(resData.message);
+    }
 
     dispatch(addProjectAction(resData.data.project));
   };
@@ -55,14 +54,11 @@ export const loadProjects = (pageNo: number, searchTerm: string = "") => {
       },
     });
 
-    if (!response.ok) {
-      const errorResData = await response.json();
-      let message = errorResData.message;
-      throw new Error(message);
-    }
-
     const resData = await response.json();
-    console.log(resData);
+
+    if (!response.ok) {
+      errorToast(resData.message);
+    }
 
     dispatch(loadProjectsAction(pageNo, resData.data.projects));
   };
@@ -78,14 +74,12 @@ export const loadCompletedProjects = () => {
       },
     });
 
-    if (!response.ok) {
-      const errorResData = await response.json();
-      let message = errorResData.message;
-      throw new Error(message);
-    }
-
     const resData = await response.json();
     console.log(resData);
+
+    if (!response.ok) {
+      errorToast(resData.message);
+    }
 
     dispatch(loadCompletedProjectsAction(resData.data.projects));
   };
@@ -101,14 +95,11 @@ export const completeProject = (id: string) => {
       },
     });
 
-    if (!response.ok) {
-      const errorResData = await response.json();
-      let message = errorResData.message;
-      throw new Error(message);
-    }
-
     const resData = await response.json();
-    console.log(resData);
+
+    if (!response.ok) {
+      errorToast(resData.message);
+    }
 
     dispatch(completeProjectAction(id));
   };
@@ -124,15 +115,18 @@ export const deleteProject = (id: string) => {
       },
     });
 
-    if (!response.ok) {
-      const errorResData = await response.json();
-      let message = errorResData.message;
-      throw new Error(message);
-    }
-
     const resData = await response.json();
-    console.log(resData);
+
+    if (!response.ok) {
+      errorToast(resData.message);
+    }
 
     dispatch(deleteProjectAction(id));
   };
 };
+
+// export const restoreProject = (id: string) => {
+//   return async (dispatch: any) => {
+//     dispatch(restoreProjectAction(id));
+//   };
+// };

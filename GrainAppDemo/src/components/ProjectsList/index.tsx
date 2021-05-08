@@ -1,48 +1,85 @@
 import React, { FC } from "react";
-import { View, StyleSheet, FlatList, ListRenderItem } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ListRenderItem,
+  TouchableNativeFeedback,
+} from "react-native";
 import Colors from "../../constants/colors";
 import Strings from "../../constants/strings";
 import DefaultText from "../DefaultText";
 import ProjectCard from "../ProjectCard";
+import { SwipeListView } from "react-native-swipe-list-view";
+import { Icon } from "react-native-elements";
+import NoDataFoundComponent from "../NoDataFoundComponent";
 
 interface ProjectsListProps {
-  data: ReadonlyArray<any> | null | undefined;
+  data: any;
   onEndReached?: ((info: { distanceFromEnd: number }) => void) | null;
-  onComplete?: any;
+  onProjectComplete?: any;
 }
 
 const ProjectsList: FC<ProjectsListProps> = (props) => {
-  console.log("ProjectData", props.data);
   const renderProjectItem: ListRenderItem<any> = ({ item }) => {
-    console.log("Project", item);
-    return <ProjectCard project={item} onComplete={props.onComplete} />;
+    return (
+      <View style={styles.projectCardContainer}>
+        <ProjectCard projectData={item} />
+      </View>
+    );
   };
 
-  return props.data?.length === 0 ? (
-    <View style={styles.noProjectFoundContainer}>
-      <DefaultText font="semibold" textStyle={styles.noProjectFoundText}>
-        {Strings.ProjectsScreen.NoProjectFoundMessage}
-      </DefaultText>
-    </View>
-  ) : (
-    <FlatList
+  const renderSwipeLeftHiddenItem: ListRenderItem<any> = ({ item }) => {
+    return (
+      <TouchableNativeFeedback
+        onPress={() => props.onProjectComplete(item._id)}
+      >
+        <View style={styles.completeProjectTextContainer}>
+          <Icon type="entypo" name="download" size={24} color={Colors.grey} />
+          <DefaultText font="semibold" textStyle={styles.completeProjectText}>
+            {Strings.ProjectsScreen.CompletedLabel}
+          </DefaultText>
+        </View>
+      </TouchableNativeFeedback>
+    );
+  };
+
+  return (
+    <SwipeListView
+      useFlatList={true}
       data={props.data}
+      //@ts-ignore
+      keyExtractor={(item, index) => index}
       renderItem={renderProjectItem}
+      renderHiddenItem={renderSwipeLeftHiddenItem}
       onEndReached={props.onEndReached}
+      rightOpenValue={-180}
+      disableRightSwipe
+      showsVerticalScrollIndicator={false}
+      ListEmptyComponent={
+        <NoDataFoundComponent
+          noDataText={Strings.ProjectsScreen.NoProjectFoundMessage}
+        />
+      }
     />
   );
 };
 
 const styles = StyleSheet.create({
-  noProjectFoundContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+  projectCardContainer: {
+    backgroundColor: Colors.solitude,
   },
-  noProjectFoundText: {
-    color: Colors.green,
-    fontSize: 22,
-    lineHeight: 33,
+  completeProjectTextContainer: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    bottom: 0,
+    position: "absolute",
+    top: 0,
+    right: 35,
+  },
+  completeProjectText: {
+    paddingLeft: 8,
+    color: Colors.grey,
   },
 });
 

@@ -12,11 +12,7 @@ import CustomButton from "../../components/CustomButton";
 import ProjectsList from "../../components/ProjectsList";
 import { useAppSelector } from "../../hooks";
 import LoadingIndicator from "../../components/LoadingIndicator";
-import {
-  completeProject,
-  deleteProject,
-  loadProjects,
-} from "../../store/actions/project";
+import { completeProject, loadProjects } from "../../store/actions/project";
 import AddProjectModal from "../../components/AddProjectModal";
 import CompletedProjectsModal from "../../components/CompletedProjectsModal";
 
@@ -25,57 +21,29 @@ interface ProjectScreenProps {
 }
 
 const ProjectScreen: FC<ProjectScreenProps> = (props) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [pageNo, setPageNo] = useState(1);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [isAddProjectModalVisible, setIsAddProjectModalVisible] = useState(
-    false
-  );
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [pageNo, setPageNo] = useState<number>(1);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [
+    isAddProjectModalVisible,
+    setIsAddProjectModalVisible,
+  ] = useState<boolean>(false);
   const [
     isCompletedProjectModalVisible,
     setIsCompletedProjectModalVisible,
-  ] = useState(false);
+  ] = useState<boolean>(false);
 
   const dispatch = useDispatch();
   const projects = useAppSelector((state) => state.project.projects);
 
   const loadProjectsHandler = async (pageNo: number, searchTerm?: string) => {
-    try {
-      await dispatch(loadProjects(pageNo, searchTerm));
-    } catch (error) {
-      console.log(error);
-      Alert.alert(
-        Strings.ProjectsScreen.AlertTitle.LoadProjects,
-        error.message,
-        [{ text: Strings.ProjectsScreen.AlertButton }]
-      );
-    }
+    setIsLoading(true);
+    await dispatch(loadProjects(pageNo, searchTerm));
+    setIsLoading(false);
   };
 
   const completeProjectHandler = async (id: string) => {
-    try {
-      await dispatch(completeProject(id));
-    } catch (error) {
-      console.log(error);
-      Alert.alert(
-        Strings.ProjectsScreen.AlertTitle.CompleteProject,
-        error.message,
-        [{ text: Strings.ProjectsScreen.AlertButton }]
-      );
-    }
-  };
-
-  const deleteProjectHandler = async (id: string) => {
-    try {
-      await dispatch(deleteProject(id));
-    } catch (error) {
-      console.log(error);
-      Alert.alert(
-        Strings.ProjectsScreen.AlertTitle.DeleteProject,
-        error.message,
-        [{ text: Strings.ProjectsScreen.AlertButton }]
-      );
-    }
+    await dispatch(completeProject(id));
   };
 
   const searchProjectHandler = (value: string) => {
@@ -95,8 +63,6 @@ const ProjectScreen: FC<ProjectScreenProps> = (props) => {
     loadProjectsHandler(pageNo);
   }, []);
 
-  isLoading ? <LoadingIndicator /> : null;
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -112,7 +78,7 @@ const ProjectScreen: FC<ProjectScreenProps> = (props) => {
             {Strings.ProjectsScreen.Header.AddProject}
           </DefaultText>
         </View>
-        <SearchBar />
+        <SearchBar onChangeText={searchProjectHandler} />
       </View>
       <View style={styles.projectListTitleContainer}>
         <DefaultText font="semibold" textStyle={styles.projectTitleText}>
@@ -134,8 +100,12 @@ const ProjectScreen: FC<ProjectScreenProps> = (props) => {
           onPress={() => setIsCompletedProjectModalVisible(true)}
         />
       </View>
-      <ProjectsList data={projects} onEndReached={listEndReachedHandler} />
-
+      <ProjectsList
+        data={projects}
+        onEndReached={listEndReachedHandler}
+        onProjectComplete={completeProjectHandler}
+      />
+      {isLoading ? <LoadingIndicator /> : null}
       <AddProjectModal
         //@ts-ignore
         openModal={isAddProjectModalVisible}

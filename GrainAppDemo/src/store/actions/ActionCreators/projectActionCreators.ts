@@ -4,8 +4,9 @@ import {
   COMPLETE_PROJECT,
   DELETE_PROJECT,
   LOAD_COMPLETED_PROJECTS,
-  LOAD_MORE_PROJECTS,
-  LOAD_PROJECTS,
+  LOAD_PROJECTS_NEXT_PAGES,
+  LOAD_PROJECTS_PAGE_1,
+  // RESTORE_PROJECT,
 } from "../../types";
 
 interface AddProjectAction {
@@ -14,8 +15,7 @@ interface AddProjectAction {
 }
 
 interface LoadProjectsAction {
-  type?: typeof LOAD_PROJECTS | typeof LOAD_MORE_PROJECTS;
-  pageNo?: number;
+  type?: typeof LOAD_PROJECTS_PAGE_1 | typeof LOAD_PROJECTS_NEXT_PAGES;
   project?: any;
 }
 
@@ -34,6 +34,11 @@ interface DeleteProjectAction {
   id?: string;
 }
 
+// interface RestoreProjectAction {
+//   type?: typeof RESTORE_PROJECT;
+//   id?: string;
+// }
+
 export const addProjectAction: ActionCreator<AddProjectAction> = (project) => {
   return { type: ADD_PROJECT, project: project };
 };
@@ -43,9 +48,9 @@ export const loadProjectsAction: ActionCreator<LoadProjectsAction> = (
   project
 ) => {
   if (pageNo === 1) {
-    return { type: LOAD_PROJECTS, project: project };
+    return { type: LOAD_PROJECTS_PAGE_1, project: project };
   } else {
-    return { type: LOAD_MORE_PROJECTS, project: project };
+    return { type: LOAD_PROJECTS_NEXT_PAGES, project: project };
   }
 };
 
@@ -64,3 +69,9 @@ export const completeProjectAction: ActionCreator<CompleteProjectAction> = (
 export const deleteProjectAction: ActionCreator<DeleteProjectAction> = (id) => {
   return { type: DELETE_PROJECT, id: id };
 };
+
+// export const restoreProjectAction: ActionCreator<RestoreProjectAction> = (
+//   id
+// ) => {
+//   return { type: RESTORE_PROJECT, id: id };
+// };

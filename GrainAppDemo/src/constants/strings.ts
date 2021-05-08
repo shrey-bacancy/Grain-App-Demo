@@ -16,8 +16,6 @@ const Strings = {
     LoginButtonLabel: "Log In",
     NewUser: "New User? ",
     SignUp: "Signup",
-    AlertTitle: "Something went wrong !!!",
-    AlertButton: "OK",
     Errors: {
       EmailRequired: "Email is Required",
       PasswordRequired: "Password is Required",
@@ -34,6 +32,7 @@ const Strings = {
     SearchPlaceholder: "Search Project",
     ProjectListTitle: "Project List",
     CompletedButtonLabel: "Completed",
+    CompletedLabel: "Completed",
     AddProjectModal: {
       Title: "+ Add New Project",
       ProjectNamePlaceholder: "Enter Project Name",
@@ -46,13 +45,6 @@ const Strings = {
       Title: "Completed Projects",
     },
     NoProjectFoundMessage: "No Projects Found!",
-    AlertTitle: {
-      LoadProjects: "Error in Load Projects Handler!!!",
-      CompleteProject: "Error in Complete Project Handler!!!",
-      DeleteProject: "Error in Delete Project Handler!!!",
-      AddProject: "Error in Add Project!!!",
-    },
-    AlertButton: "OK",
   },
 };
 

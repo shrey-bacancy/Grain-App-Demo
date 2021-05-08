@@ -3,9 +3,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { LOGIN_URL, LOGOUT_URL } from "../../api";
 import { loginAction, logoutAction } from "./ActionCreators/authActionCreators";
+import { errorToast } from "../../globals";
 
-const deviceTokenString =
-  "fuSmuSBpTJ-0YS1WllOQ7U:APA91bHxFZIdfF9SCbozbydk-G42qS8talzF9atsnQzyNglQzvx5SV0jzrb10STFl5ZUv-TfirCt15Zu4S-UgTgevtOxlCIVtoaVsxXUGIZSLqO9MOz7z4xLaOXj0zwCBM6oFDBfBJk3";
+const deviceTokenString = "ABCD";
 
 export const login = (email: string, password: string) => {
   return async (dispatch: any) => {
@@ -24,13 +24,11 @@ export const login = (email: string, password: string) => {
       }),
     });
 
-    if (!response.ok) {
-      const errorResData = await response.json();
-      let message = errorResData.message;
-      throw new Error(message);
-    }
-
     const resData = await response.json();
+
+    if (!response.ok) {
+      errorToast(resData.message);
+    }
 
     dispatch(loginAction(resData.data.user._id, resData.data.token));
     saveDataToStorage(resData.data.token, resData.data.user._id);
@@ -53,14 +51,11 @@ export const logout = () => {
       }),
     });
 
-    if (!response.ok) {
-      const errorResData = await response.json();
-      let message = errorResData.message;
-      throw new Error(message);
-    }
-
     const resData = await response.json();
-    console.log(resData);
+
+    if (!response.ok) {
+      errorToast(resData.message);
+    }
 
     AsyncStorage.removeItem("userData");
     dispatch(logoutAction());
@@ -76,8 +71,7 @@ const saveDataToStorage = async (token: string, userId: string) => {
         userId: userId,
       })
     );
-  } catch (e) {
-    console.log("Something wrong with AsyncStorage");
-    console.log(e);
+  } catch (error) {
+    errorToast(error);
   }
 };

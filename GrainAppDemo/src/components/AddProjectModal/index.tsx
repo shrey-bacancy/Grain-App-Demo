@@ -3,7 +3,6 @@ import {
   View,
   StyleSheet,
   Keyboard,
-  Alert,
   NativeSyntheticEvent,
   TextInputSubmitEditingEventData,
 } from "react-native";
@@ -31,8 +30,8 @@ interface AddProjectModalProps {
 const AddProjectModal: FC<AddProjectModalProps & InjectedFormProps> = (
   props
 ) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [tags, setTags] = useState(["Hello", "HI", "RN"]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [tags, setTags] = useState<Array<string>>([]);
   const dispatch = useDispatch();
 
   if (isLoading) {
@@ -40,28 +39,20 @@ const AddProjectModal: FC<AddProjectModalProps & InjectedFormProps> = (
   }
 
   const onSubmit = async (values: any) => {
-    console.log(values);
     setIsLoading(true);
     Keyboard.dismiss();
-    try {
-      await dispatch(
-        addProject(values.ProjectName, values.ProjectDescription, tags)
-      );
-      setIsLoading(false);
-      props.closeModal;
-      props.reset();
-    } catch (error) {
-      setIsLoading(false);
-      console.log(error);
-      Alert.alert(Strings.ProjectsScreen.AlertTitle.AddProject, error.message, [
-        { text: Strings.ProjectsScreen.AlertButton },
-      ]);
-    }
+    await dispatch(
+      addProject(values.ProjectName, values.ProjectDescription, tags)
+    );
+    setIsLoading(false);
+    props.closeModal;
+    props.reset();
   };
 
   return (
     <Modal
       isVisible={props.openModal}
+      onModalHide={() => setTags([])}
       animationIn="slideInUp"
       animationOut="slideOutDown"
       backdropOpacity={0.4}
@@ -117,7 +108,6 @@ const AddProjectModal: FC<AddProjectModalProps & InjectedFormProps> = (
             <TagComponent
               key={index}
               name={tag}
-              //@ts-ignore
               removeTag={(tag: string) =>
                 setTags(tags.filter((tg) => tg !== tag))
               }
