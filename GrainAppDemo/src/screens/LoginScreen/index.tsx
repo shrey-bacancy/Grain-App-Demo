@@ -118,7 +118,7 @@ const LoginScreen: FC<LoginScreenProps> = (props) => {
 
           <DefaultText font="regular" textStyle={styles.signUpText}>
             {Strings.LoginScreen.NewUser}
-            <DefaultText font="semibold" onPress={() => console.log("SignUp")}>
+            <DefaultText font="semibold">
               {Strings.LoginScreen.SignUp}
             </DefaultText>
           </DefaultText>

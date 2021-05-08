@@ -75,7 +75,6 @@ export const loadCompletedProjects = () => {
     });
 
     const resData = await response.json();
-    console.log(resData);
 
     if (!response.ok) {
       errorToast(resData.message);

@@ -29,7 +29,6 @@ const projectReducer = (state = initialState, action: any): State => {
       const updatedCompletedProjects = state.completedProjects.filter(
         (project: any) => project._id !== action.id
       );
-      console.log("Del Proj", updatedCompletedProjects);
 
       return {
         ...state,
@@ -46,9 +45,6 @@ const projectReducer = (state = initialState, action: any): State => {
         (project: any) => project._id !== action.id
       );
 
-      console.log("Complete Proj", completedProject);
-      console.log("Complete Proj update", updatedProjects);
-
       return {
         ...state,
         completedProjects: [completedProject, ...state.completedProjects],
@@ -64,9 +60,6 @@ const projectReducer = (state = initialState, action: any): State => {
     //   const updateCompletedProjects = state.completedProjects.filter(
     //     (project: any) => project._id !== action.id
     //   );
-
-    //   console.log("Restore Proj", restoredProject);
-    //   console.log("Restore Comp Proj update", updateCompletedProjects);
 
     //   return {
     //     ...state,
