@@ -1,13 +1,13 @@
 import { AUTO_LOGIN, LOGIN, LOGOUT } from "../types";
 
 interface State {
-  username?: string | null;
+  userId?: string | null;
   token?: string | null;
   isUserLoggedIn?: boolean;
 }
 
 const initialState: State = {
-  username: null,
+  userId: null,
   token: null,
   isUserLoggedIn: false,
 };
@@ -16,7 +16,7 @@ const authReducer = (state = initialState, action: any): State => {
   switch (action.type) {
     case LOGIN:
       return {
-        username: action.username,
+        userId: action.userId,
         token: action.token,
         isUserLoggedIn: true,
       };

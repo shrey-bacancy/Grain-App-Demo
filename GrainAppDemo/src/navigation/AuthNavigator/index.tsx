@@ -1,9 +1,10 @@
-import React from "react";
+import React, { FC } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import LoginScreen from "../../screens/LoginScreen";
-import Screens from "../screens";
 
-const AuthNavigator = () => {
+import Screens from "../screens";
+import { LoginScreen } from "../../screens";
+
+const AuthNavigator: FC = () => {
   const AuthStack = createStackNavigator();
 
   return (

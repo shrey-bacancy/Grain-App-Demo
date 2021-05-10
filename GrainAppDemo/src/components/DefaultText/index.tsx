@@ -1,8 +1,8 @@
 import React, { FC, ReactNode } from "react";
 import { StyleSheet, TextProps } from "react-native";
 import { Text } from "react-native-elements";
-import Colors from "../../constants/colors";
-import Fonts from "../../constants/fonts";
+
+import { Colors, Fonts } from "../../constants";
 
 interface DefaultTextProps {
   font: "regular" | "medium" | "semibold";

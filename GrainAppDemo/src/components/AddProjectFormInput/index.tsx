@@ -7,9 +7,9 @@ import {
 } from "react-native";
 import { Input } from "react-native-elements";
 import { WrappedFieldProps } from "redux-form";
-import Colors from "../../constants/colors";
-import Fonts from "../../constants/fonts";
-import DefaultText from "../DefaultText";
+
+import { DefaultText } from "..";
+import { Colors, Fonts } from "../../constants";
 
 interface AddProjectFormInputProps {
   autoFocus?: boolean | undefined;

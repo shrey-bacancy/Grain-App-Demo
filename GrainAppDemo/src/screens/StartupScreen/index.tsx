@@ -1,31 +1,29 @@
-import React, { useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import { View, StyleSheet } from "react-native";
 import { useDispatch } from "react-redux";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import LoadingIndicator from "../../components/LoadingIndicator";
-import Colors from "../../constants/colors";
-import {
-  autoLogin,
-  loginAction,
-} from "../../store/actions/ActionCreators/authActionCreators";
+import { LoadingIndicator } from "../../components";
+import { Colors } from "../../constants";
+import { useAppSelector } from "../../hooks";
+import { loginAction } from "../../store/actions/ActionCreators/authActionCreators";
+import { autoLogin } from "../../store/actions/auth";
 
 interface StartupScreenProps {}
 
-const StartupScreen = (props: StartupScreenProps) => {
+const StartupScreen: FC<StartupScreenProps> = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const tryLogin = async () => {
-      const userData = await AsyncStorage.getItem("userData");
+  const userId = useAppSelector((state) => state.auth.userId);
+  const token = useAppSelector((state) => state.auth.token);
 
-      if (!userData) {
+  useEffect(() => {
+    const tryLogin = () => {
+      if (!userId && !token) {
         dispatch(autoLogin());
         return;
       }
 
-      const transformedData = JSON.parse(userData);
-      dispatch(loginAction(transformedData.userId, transformedData.token));
+      dispatch(loginAction(userId, token));
     };
 
     tryLogin();

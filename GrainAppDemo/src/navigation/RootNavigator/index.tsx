@@ -1,11 +1,11 @@
-import React from "react";
+import React, { FC } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import AppNavigator from "../AppNavigator";
-import AuthNavigator from "../AuthNavigator";
-import { useAppSelector } from "../../hooks";
-import StartupScreen from "../../screens/StartupScreen";
 
-const RootNavigator = () => {
+import { AppNavigator, AuthNavigator } from "..";
+import { useAppSelector } from "../../hooks";
+import { StartupScreen } from "../../screens";
+
+const RootNavigator: FC = () => {
   const token = useAppSelector((state) => state.auth.token);
   const isLoggedIn = useAppSelector((state) => state.auth.isUserLoggedIn);
 

@@ -1,7 +1,8 @@
 import React, { FC } from "react";
 import { View, StyleSheet } from "react-native";
-import Colors from "../../constants/colors";
-import DefaultText from "../DefaultText";
+
+import { DefaultText } from "..";
+import { Colors } from "../../constants";
 
 interface NoDataFoundComponentProps {
   noDataText?: string;

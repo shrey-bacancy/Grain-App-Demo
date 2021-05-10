@@ -3,17 +3,15 @@ import { View, StyleSheet } from "react-native";
 import { Icon } from "react-native-elements";
 import Modal from "react-native-modal";
 import { useDispatch } from "react-redux";
-import Colors from "../../constants/colors";
-import Strings from "../../constants/strings";
+
+import { CompletedProjectsList, DefaultText, LoadingIndicator } from "..";
+import { Colors, Strings } from "../../constants";
 import { useAppSelector } from "../../hooks";
 import {
   deleteProject,
   loadCompletedProjects,
   // restoreProject,
 } from "../../store/actions/project";
-import CompletedProjectsList from "../CompletedProjectsList";
-import DefaultText from "../DefaultText";
-import LoadingIndicator from "../LoadingIndicator";
 
 interface CompletedProjectsModalProps {
   openModal?: boolean | undefined;

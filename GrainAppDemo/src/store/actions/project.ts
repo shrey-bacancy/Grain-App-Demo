@@ -5,7 +5,6 @@ import {
   FETCH_COMPLETED_PROJECTS_URL,
   FETCH_PROJECTS_URL,
 } from "../../api";
-import { errorToast } from "../../globals";
 import {
   addProjectAction,
   completeProjectAction,
@@ -14,6 +13,7 @@ import {
   loadProjectsAction,
   // restoreProjectAction,
 } from "./ActionCreators/projectActionCreators";
+import { errorToast } from "../../globals";
 
 export const addProject = (
   title: string,

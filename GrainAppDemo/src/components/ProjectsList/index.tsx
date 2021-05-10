@@ -5,13 +5,11 @@ import {
   ListRenderItem,
   TouchableNativeFeedback,
 } from "react-native";
-import Colors from "../../constants/colors";
-import Strings from "../../constants/strings";
-import DefaultText from "../DefaultText";
-import ProjectCard from "../ProjectCard";
-import { SwipeListView } from "react-native-swipe-list-view";
 import { Icon } from "react-native-elements";
-import NoDataFoundComponent from "../NoDataFoundComponent";
+import { SwipeListView } from "react-native-swipe-list-view";
+
+import { DefaultText, NoDataFoundComponent, ProjectCard } from "..";
+import { Colors, Strings } from "../../constants";
 
 interface ProjectsListProps {
   data: any;

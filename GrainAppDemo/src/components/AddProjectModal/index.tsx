@@ -11,15 +11,17 @@ import Modal from "react-native-modal";
 import { useDispatch } from "react-redux";
 import { compose } from "redux";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
-import Colors from "../../constants/colors";
-import Strings from "../../constants/strings";
+
+import {
+  AddProjectFormInput,
+  CustomButton,
+  DefaultText,
+  LoadingIndicator,
+  TagComponent,
+} from "..";
+import { Colors, Strings } from "../../constants";
 import { addProject } from "../../store/actions/project";
 import { fieldRequired } from "../../validation";
-import AddProjectFormInput from "../AddProjectFormInput";
-import CustomButton from "../CustomButton";
-import DefaultText from "../DefaultText";
-import LoadingIndicator from "../LoadingIndicator";
-import TagComponent from "../TagComponent";
 
 interface AddProjectModalProps {
   openModal?: boolean | undefined;

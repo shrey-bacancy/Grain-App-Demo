@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { FlatList, ListRenderItem } from "react-native";
-import CompletedProjectCard from "../CompletedProjectCard";
+
+import { CompletedProjectCard } from "..";
 
 interface CompletedProjectsListProps {
   data?: any;

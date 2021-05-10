@@ -1,9 +1,12 @@
 import { Platform } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { LOGIN_URL, LOGOUT_URL } from "../../api";
-import { loginAction, logoutAction } from "./ActionCreators/authActionCreators";
 import { errorToast } from "../../globals";
+import {
+  loginAction,
+  logoutAction,
+  autoLoginAction,
+} from "./ActionCreators/authActionCreators";
 
 const deviceTokenString = "ABCD";
 
@@ -31,7 +34,6 @@ export const login = (email: string, password: string) => {
     }
 
     dispatch(loginAction(resData.data.user._id, resData.data.token));
-    saveDataToStorage(resData.data.token, resData.data.user._id);
   };
 };
 
@@ -57,21 +59,12 @@ export const logout = () => {
       errorToast(resData.message);
     }
 
-    AsyncStorage.removeItem("userData");
     dispatch(logoutAction());
   };
 };
 
-const saveDataToStorage = async (token: string, userId: string) => {
-  try {
-    await AsyncStorage.setItem(
-      "userData",
-      JSON.stringify({
-        token: token,
-        userId: userId,
-      })
-    );
-  } catch (error) {
-    errorToast(error);
-  }
+export const autoLogin = () => {
+  return async (dispatch: any) => {
+    dispatch(autoLoginAction());
+  };
 };

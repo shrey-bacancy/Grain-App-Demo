@@ -1,8 +1,9 @@
-import React from "react";
+import React, { FC } from "react";
 import { ActivityIndicator } from "react-native";
-import Colors from "../../constants/colors";
 
-const LoadingIndicator = () => {
+import { Colors } from "../../constants";
+
+const LoadingIndicator: FC = () => {
   return <ActivityIndicator size="large" color={Colors.green} />;
 };
 

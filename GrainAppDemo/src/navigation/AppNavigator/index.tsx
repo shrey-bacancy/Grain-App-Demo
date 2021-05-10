@@ -1,9 +1,10 @@
-import React from "react";
+import React, { FC } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import ProjectScreen from "../../screens/ProjectsScreen";
-import Screens from "../screens";
 
-const AppNavigator = () => {
+import Screens from "../screens";
+import { ProjectScreen } from "../../screens";
+
+const AppNavigator: FC = () => {
   const AppStack = createStackNavigator();
 
   return (

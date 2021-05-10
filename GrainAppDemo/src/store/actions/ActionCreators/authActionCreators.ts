@@ -1,4 +1,5 @@
 import { ActionCreator } from "redux";
+
 import { AUTO_LOGIN, LOGIN, LOGOUT } from "../../types";
 
 interface LoginAction {
@@ -26,6 +27,6 @@ export const logoutAction: ActionCreator<LogoutAction> = () => {
   return { type: LOGOUT };
 };
 
-export const autoLogin: ActionCreator<AutoLoginAction> = () => {
+export const autoLoginAction: ActionCreator<AutoLoginAction> = () => {
   return { type: AUTO_LOGIN };
 };

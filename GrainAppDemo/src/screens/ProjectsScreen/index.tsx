@@ -1,20 +1,22 @@
 import React, { FC, useEffect, useState } from "react";
-import { View, StyleSheet, Alert } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { Icon } from "react-native-elements";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useDispatch } from "react-redux";
-import Colors from "../../constants/colors";
-import DefaultText from "../../components/DefaultText";
-import Strings from "../../constants/strings";
-import SearchBar from "../../components/SearchBar";
-import CustomButton from "../../components/CustomButton";
-import ProjectsList from "../../components/ProjectsList";
+
+import {
+  AddProjectModal,
+  CompletedProjectsModal,
+  CustomButton,
+  CustomSearchBar,
+  DefaultText,
+  LoadingIndicator,
+  ProjectsList,
+} from "../../components";
+import { Colors, Strings } from "../../constants";
 import { useAppSelector } from "../../hooks";
-import LoadingIndicator from "../../components/LoadingIndicator";
 import { completeProject, loadProjects } from "../../store/actions/project";
-import AddProjectModal from "../../components/AddProjectModal";
-import CompletedProjectsModal from "../../components/CompletedProjectsModal";
 
 interface ProjectScreenProps {
   navigation?: StackNavigationProp<{}>;
@@ -78,7 +80,7 @@ const ProjectScreen: FC<ProjectScreenProps> = (props) => {
             {Strings.ProjectsScreen.Header.AddProject}
           </DefaultText>
         </View>
-        <SearchBar onChangeText={searchProjectHandler} />
+        <CustomSearchBar onChangeText={searchProjectHandler} />
       </View>
       <View style={styles.projectListTitleContainer}>
         <DefaultText font="semibold" textStyle={styles.projectTitleText}>
@@ -129,7 +131,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 24,
     backgroundColor: Colors.white,
     paddingTop: 10,
-    paddingHorizontal: 23,
+    paddingHorizontal: 24,
   },
   titleContainer: {
     flexDirection: "row",

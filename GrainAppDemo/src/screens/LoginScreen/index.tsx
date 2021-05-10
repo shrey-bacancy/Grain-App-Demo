@@ -14,12 +14,13 @@ import { compose } from "redux";
 import { useDispatch } from "react-redux";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
 
-import CustomButton from "../../components/CustomButton";
-import DefaultText from "../../components/DefaultText";
-import LoadingIndicator from "../../components/LoadingIndicator";
-import LoginFormInput from "../../components/LoginFormInput";
-import Colors from "../../constants/colors";
-import Strings from "../../constants/strings";
+import {
+  CustomButton,
+  DefaultText,
+  LoadingIndicator,
+  LoginFormInput,
+} from "../../components";
+import { Colors, Images, Strings } from "../../constants";
 import { login } from "../../store/actions/auth";
 import {
   emailRequired,
@@ -27,7 +28,6 @@ import {
   validateEmail,
   validatePassword,
 } from "../../validation";
-import Images from "../../constants/images";
 
 interface LoginScreenProps extends InjectedFormProps {
   navigation?: StackNavigationProp<{}>;
@@ -46,7 +46,6 @@ const LoginScreen: FC<LoginScreenProps> = (props) => {
   const onSubmit = async (values: any) => {
     setIsLoading(true);
     await dispach(login(values.Email, values.Password));
-    setIsLoading(false);
   };
 
   return (

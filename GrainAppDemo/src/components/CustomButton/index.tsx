@@ -2,8 +2,8 @@ import React, { FC } from "react";
 import { GestureResponderEvent, StyleSheet } from "react-native";
 import { Button } from "react-native-elements";
 import { IconNode } from "react-native-elements/dist/icons/Icon";
-import Colors from "../../constants/colors";
-import Fonts from "../../constants/fonts";
+
+import { Colors, Fonts } from "../../constants";
 
 interface CustomButtonProps {
   title?: string;

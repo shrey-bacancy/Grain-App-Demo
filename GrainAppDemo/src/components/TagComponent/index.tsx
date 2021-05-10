@@ -1,8 +1,9 @@
 import React, { FC } from "react";
 import { StyleSheet, View } from "react-native";
 import { Icon } from "react-native-elements";
-import Colors from "../../constants/colors";
-import DefaultText from "../DefaultText";
+
+import { DefaultText } from "..";
+import { Colors } from "../../constants";
 
 interface TagComponentProps {
   name?: string;
