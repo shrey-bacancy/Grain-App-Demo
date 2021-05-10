@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
   },
   signUpText: {
     textAlign: "center",
-    paddingTop: 26,
+    paddingVertical: 26,
   },
 });
 
