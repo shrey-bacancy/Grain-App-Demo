@@ -67,7 +67,7 @@ const LoginScreen: FC<LoginScreenProps> = (props) => {
         <ScrollView
           style={styles.loginForm}
           showsVerticalScrollIndicator={false}
-          keyboardShouldPersistTaps="always"
+          // keyboardShouldPersistTaps="always"
         >
           <Field
             name="Email"

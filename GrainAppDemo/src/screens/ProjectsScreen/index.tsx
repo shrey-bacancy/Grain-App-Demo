@@ -17,6 +17,7 @@ import {
 import { Colors, Strings } from "../../constants";
 import { useAppSelector } from "../../hooks";
 import { completeProject, loadProjects } from "../../store/actions/project";
+import { logout } from "../../store/actions/auth";
 
 interface ProjectScreenProps {
   navigation?: StackNavigationProp<{}>;
@@ -61,6 +62,10 @@ const ProjectScreen: FC<ProjectScreenProps> = (props) => {
     setIsLoading(false);
   };
 
+  const logoutHandler = async () => {
+    await dispatch(logout());
+  };
+
   useEffect(() => {
     loadProjectsHandler(pageNo);
   }, []);
@@ -79,6 +84,13 @@ const ProjectScreen: FC<ProjectScreenProps> = (props) => {
           >
             {Strings.ProjectsScreen.Header.AddProject}
           </DefaultText>
+          <Icon
+            type="material"
+            name="logout"
+            size={25}
+            color={Colors.green}
+            onPress={logoutHandler}
+          />
         </View>
         <CustomSearchBar onChangeText={searchProjectHandler} />
       </View>
@@ -143,6 +155,7 @@ const styles = StyleSheet.create({
     lineHeight: 35,
   },
   addProjectText: {
+    fontSize: 20,
     color: Colors.green,
   },
   projectListTitleContainer: {
