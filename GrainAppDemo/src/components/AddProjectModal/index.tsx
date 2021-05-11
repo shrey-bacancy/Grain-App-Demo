@@ -47,8 +47,8 @@ const AddProjectModal: FC<AddProjectModalProps & InjectedFormProps> = (
       addProject(values.ProjectName, values.ProjectDescription, tags)
     );
     setIsLoading(false);
-    props.closeModal;
     props.reset();
+    props.closeModal();
   };
 
   return (

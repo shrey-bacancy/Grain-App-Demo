@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   error: {
+    color: Colors.redOrange,
     paddingHorizontal: 30,
     paddingBottom: 20,
   },

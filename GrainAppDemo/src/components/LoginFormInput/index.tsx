@@ -97,8 +97,9 @@ const styles = StyleSheet.create({
     paddingLeft: 7,
   },
   error: {
-    paddingHorizontal: 30,
+    // paddingHorizontal: 30,
     paddingBottom: 20,
+    color: Colors.redOrange,
   },
 });
 

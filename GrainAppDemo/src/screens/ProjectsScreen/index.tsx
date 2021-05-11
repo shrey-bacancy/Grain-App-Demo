@@ -123,8 +123,11 @@ const ProjectScreen: FC<ProjectScreenProps> = (props) => {
       <AddProjectModal
         //@ts-ignore
         openModal={isAddProjectModalVisible}
-        closeModal={() => setIsAddProjectModalVisible(false)}
+        closeModal={() => {
+          setIsAddProjectModalVisible(false);
+        }}
       />
+
       <CompletedProjectsModal
         openModal={isCompletedProjectModalVisible}
         closeModal={() => setIsCompletedProjectModalVisible(false)}
